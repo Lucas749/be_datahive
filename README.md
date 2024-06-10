@@ -14,7 +14,7 @@ API](https://be-datahive.com/documentation.html).
 pip install be_datahive
 ```
 
-# Documentation
+# Get Started
 
 Create an `api` object for interacting with the API:
 
@@ -36,6 +36,11 @@ Convert efficiency & bystander data into machine-ready arrays:
 ef_features, ef_target = api.get_efficiency_ml_arrays(efficiency_data, encoding='one-hot')
 by_features, by_target = api.get_bystander_ml_arrays(bystander_data, encoding='one-hot')
 ```
+# API Documentation
+
+The Python wrapper uses the BE-dataHive API which is accessible at the endpoint (https://be-server.herokuapp.com). 
+The detailed API documentation, describing all endpoints, query parameters, and response schema, can be viewed [here](https://be-datahive.com/documentation.html).
+
 
 # Troubleshooting
 
