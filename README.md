@@ -77,6 +77,6 @@ API](https://be-datahive.com/documentation.html), please cite our paper as outli
 @article{Schneider.2023,
     title = "BE-dataHIVE: a Base Editing Database",
     author = "Lucas Schneider, Peter Minary",
-    year = "2023",
+    year = "2024",
 }
 ```
