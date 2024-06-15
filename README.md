@@ -33,8 +33,8 @@ bystander_data = api.get_bystander()
 Convert efficiency & bystander data into machine-ready arrays:
 
 ``` python
-ef_features, ef_target = api.get_efficiency_ml_arrays(efficiency_data, encoding='one-hot')
-by_features, by_target = api.get_bystander_ml_arrays(bystander_data, encoding='one-hot')
+ef_features, ef_target, variable_info = api.get_efficiency_ml_arrays(efficiency_data, target_col = "efficiency_full_grna_reported", encoding='hilbert-curve', clean=True, flatten=True)
+by_features, by_target, variable_info = api.get_bystander_ml_arrays(bystander_data, encoding='one-hot', bystander_type = 'edited', clean=True, flatten=True)
 ```
 # API Documentation
 
