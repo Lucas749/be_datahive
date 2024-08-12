@@ -4,7 +4,6 @@ import be_datahive
 # Import required packages
 from sklearn.model_selection import train_test_split, cross_val_score # pip install -U scikit-learn
 from sklearn.ensemble import GradientBoostingRegressor # pip install -U scikit-learn
-from sklearn.metrics import mean_squared_error # pip install -U scikit-learn
 from scipy.stats import spearmanr # pip install -U scipy
 import os
 import json
@@ -29,6 +28,11 @@ def convert_keys_to_str(obj):
         return [convert_keys_to_str(elem) for elem in obj]
     else:
         return obj
+
+# Spearman correlation scorer
+def spearman_scorer(y_true, y_pred):
+    spearman_corr, _ = spearmanr(y_true, y_pred)
+    return spearman_corr
 
 ################################################################
 # Machine Learning Training
@@ -109,11 +113,11 @@ for base_editor in base_editors:
         X_train, X_test, y_train, y_test = train_test_split(X, target, test_size=0.2, random_state=42)
         
         # Initialize the gradient boost regressor
-        gbr = GradientBoostingRegressor(random_state=42)
+        gbr = GradientBoostingRegressor(learning_rate=0.1, n_estimators=100, max_depth=3, random_state=42)
         
         # Perform cross-validation
-        cv_scores = cross_val_score(gbr, X_train, y_train, cv=5, scoring='neg_mean_squared_error')
-        cv_mse = -cv_scores.mean()
+        cv_scores = cross_val_score(gbr, X_train, y_train, cv=5, scoring=spearman_scorer)
+        cv_spearman_corr = cv_scores.mean()
         
         # Fit the model on the entire training set
         gbr.fit(X_train, y_train)
@@ -121,32 +125,26 @@ for base_editor in base_editors:
         # Make predictions on the test set
         y_pred = gbr.predict(X_test)
         
-        # Calculate MSE
-        mse = mean_squared_error(y_test, y_pred)
-        
         # Calculate Spearman correlation
         spearman_corr, _ = spearmanr(y_test, y_pred)
         
         # Store results
         results[tuple(combination)] = {
-            'cv_mse': float(cv_mse),
-            'test_mse': float(mse),
-            'spearman_corr': float(spearman_corr)
+            'cv_spearman_corr': float(cv_spearman_corr),
+            'test_spearman_corr': float(spearman_corr)
         }
         
-        print(f"Cross-validation MSE: {cv_mse}")
-        print(f"Test MSE: {mse}")
-        print(f"Spearman correlation: {spearman_corr}")
+        print(f"Cross-validation Spearman correlation: {cv_spearman_corr}")
+        print(f"Test Spearman correlation: {spearman_corr}")
 
         if len(results) > 0:
             # Find best performing combination
-            best_combination = min(results, key=lambda x: results[x]['test_mse'])
+            best_combination = max(results, key=lambda x: results[x]['test_spearman_corr'])
             
             # Add best combination to results
             results['best_combination'] = {
                 'feature_groups': list(best_combination),
-                'test_mse': float(results[best_combination]['test_mse']),
-                'spearman_corr': float(results[best_combination]['spearman_corr'])
+                'test_spearman_corr': float(results[best_combination]['test_spearman_corr'])
             }
             
             # Convert the results dictionary
