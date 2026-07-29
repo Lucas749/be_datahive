@@ -7,7 +7,7 @@ import pickle
 
 #be_datahive API Wrapper
 class be_datahive:
-    BASE_URL = "https://be-server.herokuapp.com"
+    BASE_URL = "https://api.be-datahive.com"
     DATASIZE = 460000
     DEFAULT_LIMIT = 250
     DEFAULT_OFFSET = 0

@@ -38,7 +38,7 @@ by_features, by_target, variable_info = api.get_bystander_ml_arrays(bystander_da
 ```
 # API Documentation
 
-The Python wrapper uses the BE-dataHive API which is accessible at the endpoint (https://be-server.herokuapp.com). 
+The Python wrapper uses the BE-dataHive API which is accessible at the endpoint (https://api.be-datahive.com).
 The detailed API documentation, describing all endpoints, query parameters, and response schema, can be viewed [here](https://be-datahive.com/documentation.html).
 
 
@@ -47,7 +47,7 @@ The detailed API documentation, describing all endpoints, query parameters, and 
 If you encounter any issues while using the `be_datahive` library, please refer to the common issues listed below:
 
 1. **Installation issues**: Make sure you have the latest version of `pip` and Python installed. Use `pip install --upgrade pip` to upgrade pip if necessary.
-2. **API Connection Errors**: Check your internet connection and ensure that the API endpoint (https://be-server.herokuapp.com) is reachable.
+2. **API Connection Errors**: Check your internet connection and ensure that the API endpoint (https://api.be-datahive.com) is reachable.
 3. **Data Retrieval Issues**: Ensure that you are using the correct function names and parameters as outlined in the documentation.
 
 If your issue is not listed here or you need further assistance, please open an issue on GitHub or reach out directly.
