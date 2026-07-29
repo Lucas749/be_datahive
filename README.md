@@ -1,6 +1,6 @@
 # be-datahive
 
-[![image](https://img.shields.io/pypi/v/be_datahive.svg)](https://pypi.python.org/pypi/be_datahive)
+[![PyPI version](https://img.shields.io/badge/PyPI-0.1.4-blue.svg)](https://pypi.org/project/be-datahive/0.1.4/)
  
 Python library for the [BE-dataHIVE
 API](https://be-datahive.com/documentation.html).
